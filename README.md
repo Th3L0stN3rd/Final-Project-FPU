@@ -1,18 +1,14 @@
 # Final Project for Intro to Data Science
 
-## Term YYYY
+## Summer B 2021
 
 Team members: 
 
-- Student 1: [Rei Sanchez-Arias](mailto:rsanchezarias@floridapoly.edu)
+- [Zadrian Maldonado](zmaldonado1356@floridapoly.edu)
 
-- Student 2: [Student name](mailto:student2@floridapoly.edu)
+- [Wesley Deloach](wdeloach1676@floridapoly.edu)
 
-- Student 3: [Student name](mailto:student3@floridapoly.edu)
+### Summary
 
 
-**Summary**
-
-Our project investigates the main characteristics of popular movies in recent years.
-We will be using the data available at: 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv> 
+_Last Edit: 07/28/2021_
