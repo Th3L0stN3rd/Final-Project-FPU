@@ -1,0 +1,19 @@
+---
+title: "Final Report for Intro to Data Science"
+output: html_notebook
+---
+# Loading Pre-requisites 
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+```{r}
+Esports <- read_csv("https://raw.githubusercontent.com/Th3L0stN3rd/Final-Project-FPU/master/data/GeneralEsportData.csv?token=AKWHJYZLVA7KL5Z7RRDZXJ3BBIG4Y")
+
+```
+
+```{r}
+Esports
+```
+ 
+## Let's Get to The EDA
