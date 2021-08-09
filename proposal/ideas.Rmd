@@ -3,16 +3,23 @@ title: "Project Proposal"
 output: html_notebook
 ---
 
-(notice that you can reuse some of the sections below for the final project report)
 
-## Section 1. Introduction
+## Introduction
 
-Include a brief **introduction or motivation** here
+Our main goal was to find what was the most popular Genre/Game for Esports 
 
-## Section 2. Data Analysis Plan
 
-List any **initial questions** you plan to explore in this project. 
+## Data Analysis Plan
 
-## Section 3. Data
+- Which game(s) has the most earnings overall
 
-Include a brief **description of your dataset** (source, available attributes, format, etc.)
+- Which game has the lowest earnings overall
+
+- What is the gap of earnings between the top game and the second most total earned game
+
+- Any relation between total earnings and tournaments
+
+##  Data
+
+
+This dataset includes information of generic data on each esports related title which can be found at https://www.kaggle.com/rankirsh/esports-earnings. The data fields that are included are: Game, Release Date, Genre, Total Earnings, Online Earnings, Total Players, and Total Tournaments. 
