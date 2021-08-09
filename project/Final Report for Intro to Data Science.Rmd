@@ -105,10 +105,7 @@ ggplot(Esports) +
   geom_point(aes(x = TotalTournaments, y = TotalEarnings, color = Genre, size = TotalPlayers),
              alpha = 0.6)
 ```
-
-
-
-We first can see a clump of Genre's where there isn't much 'activity' in terms of tournaments or earnings. This could indicate unpopularity within the gaming community for these Genre's. Interestingly, we have one point where a `Strategy` game has had `~6000` tournaments but made much less than the big titles such as `CS:GO` or `Dota2`. Let's look at which game this could be: 
+Interestingly, we have one point where a `Strategy` game has had `~6000` tournaments but made much less than the big titles such as `CS:GO` or `Dota2`. Let's look at which game this could be: 
 
 ```{r}
 Esports %>% 
