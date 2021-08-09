@@ -2,18 +2,123 @@
 title: "Final Report for Intro to Data Science"
 output: html_notebook
 ---
-# Loading Pre-requisites 
+# Loading Prerequisites 
 ```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
 
 ```{r}
-Esports <- read_csv("https://raw.githubusercontent.com/Th3L0stN3rd/Final-Project-FPU/master/data/GeneralEsportData.csv?token=AKWHJYZLVA7KL5Z7RRDZXJ3BBIG4Y")
+Esports <- read_csv("https://raw.githubusercontent.com/Th3L0stN3rd/Final-Project-FPU/master/data/GeneralEsportData.csv?token=AKWHJYZYIIYRRATTGUBRSDTBCCZR4")
 
 ```
 
 ```{r}
 Esports
 ```
- 
+ <div align="center">
 ## Let's Get to The EDA
+
+First, we can find the most total earnings of all `Games`, `Genres` and `Release Dates:`
+
+```{r}
+Esports %>% 
+  select(Game, TotalEarnings, Genre) %>% 
+  arrange(desc(TotalEarnings))
+```
+Let's take a look at Dota2's Genre as it is the top total earning game:
+```{r}
+Esports %>% 
+  select(Game, TotalEarnings, Genre) %>% 
+  filter(Genre == "Multiplayer Online Battle Arena") %>% 
+  arrange(desc(TotalEarnings))
+```
+
+We can see that Dota2 takes the cake in terms of earnings by a long shot
+
+```{r}
+round(234795551.17 - 84189144.8)
+```
+
+
+We can see that Dota2 has `~$150m` more total earnings than the next competing Game in the same Genre
+
+```{r}
+Esports %>% 
+  select(Game, TotalEarnings, Genre) %>% 
+  arrange(desc(TotalEarnings))
+```
+```{r}
+round(234795551.17 - 117125739.01)
+```
+
+
+We can also see that Dota2 has `~$117m` more total earnings than the next competing Game as a whole. However we will eventually look into how many actual tournaments were played in relation to its total earnings.
+
+![](https://cdn.cloudflare.steamstatic.com/steam/apps/570/capsule_616x353.jpg?t=1628188932)
+
+
+For our personal interests, let's look at FPS games.
+
+```{r}
+Esports %>% 
+  select(Game, TotalEarnings, Genre) %>% 
+  filter(Genre == "First-Person Shooter") %>% 
+  arrange(desc(TotalEarnings))
+```
+
+With no surprise on our end, we see `CS:GO` as the top dog in earnings out of all `First-Person Shooter` games.
+
+ ![](https://seeklogo.com/images/C/csgo-logo-CAA0A4D48A-seeklogo.com.png)
+
+
+Now let's look at the least total earned Games.
+```{r}
+Esports %>% 
+  select(Game, TotalEarnings, Genre) %>% 
+  arrange(TotalEarnings)
+```
+Just from this output, we can see some discrepancies with earnings such as `Halo: Infinite`. It's evident that this game has not been released yet as of 08-07-2021. Let us look at the total tournaments for said game.
+
+```{r}
+Esports %>% 
+  select(Game, TotalTournaments, Genre) %>% 
+  filter(Game == "Halo: Infinite")  %>% 
+  arrange(TotalTournaments)
+```
+
+Coming from this output, this specific dataset has `Games` with **no** `Total Tournaments`, so lets clean this up to get rid of potential games that have not been released yet, such as `Halo: Infinite`. 
+
+
+```{r}
+Esports <- Esports %>% 
+  filter(TotalTournaments > 0)
+
+Esports %>% 
+  select(Game, TotalEarnings, TotalTournaments, Genre) %>% 
+  arrange(TotalTournaments)
+```
+
+Now that we know what games have the most total earnings, let us look at the relation between `Total Earnings` and `Total Tournaments`. 
+
+```{r}
+ggplot(Esports) +
+  geom_point(aes(x = TotalTournaments, y = TotalEarnings, color = Genre, size = TotalPlayers),
+             alpha = 0.6)
+```
+Interestingly, we have one point where a `Strategy` game has had `~6000` tournaments but made much less than the big titles such as `CS:GO` or `Dota2`. Let's look at which game this could be: 
+
+```{r}
+Esports %>% 
+  filter(Genre == "Strategy", TotalTournaments >= 6000) 
+```
+![](https://bnetcmsus-a.akamaihd.net/cms/blog_header/2g/2G4VZH5TIWJF1602720144046.jpg)
+
+Now out of this dataset, let's determine the most popular Genres:
+
+```{r}
+ggplot(Esports) +
+  geom_boxplot(aes(x = TotalTournaments, y = Genre)) 
+  
+```
+Looking at the vast outliers in these Game Genre's, we can see that `First-Person Shooter` and `Strategy` genre's are leading in popularity as we have deduced from earlier (**SOLEY BASED ON TOTAL TOURNAMENTS**). However we do see that `Fighting Game` and `Multiplayer Online Battle Arena` do make up the 3rd and 4th most played game `Genre`'s respectively.
+
